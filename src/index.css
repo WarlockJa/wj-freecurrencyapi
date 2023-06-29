@@ -9,8 +9,10 @@
   -webkit-text-size-adjust: 100%;
 
   --sz-max-width: 700px;
-  --clr-main-font: #bfbfbf;
-  --clr-main-bg: #232323;
+  --clr-font-main: rgba(255, 255, 255, 0.87);
+  --clr-bg-main: #242424;
+  --clr-border-buttons-hover: #646cff;
+  --clr-button-bg: #414141;
 }
 *,
 *::after,
@@ -26,7 +28,35 @@ body {
   min-height: 100vh;
 }
 
+input,
+select {
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--clr-button-bg);
+  color: var(--clr-font-main);
+  transition: border-color 0.25s;
+}
+input,
+select {
+  padding: 0.6em 1.2em;
+}
+input:hover,
+select:hover {
+  border-color: var(--clr-border-buttons-hover);
+}
+input:focus,
+input:focus-visible {
+  outline: 1px auto -webkit-focus-ring-color;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
+    --clr-font-main: #342e3b;
+    --clr-bg-main: #ecf2ff;
+    --clr-button-bg: #e3dffd;
   }
 }

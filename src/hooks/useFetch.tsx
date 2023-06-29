@@ -30,18 +30,29 @@ export default function useFetch(url: string) {
       currencyapiLocalData.timestamp + 60 * 1000 < Date.now()
     ) {
       console.log("fetching new currency data");
-      fetch(url, {
-        method: "GET",
-        headers: {
-          apikey: import.meta.env.VITE_APP_FREECURRENCYAPI_KEY!,
-        },
-      })
+      // getting dates range for fetch request
+      const dateYesterday = new Date();
+      dateYesterday.setDate(dateYesterday.getDate() - 1);
+      const dateMonthAgo = new Date();
+      dateMonthAgo.setDate(dateMonthAgo.getDate() - 31);
+
+      fetch(
+        `${
+          import.meta.env.VITE_APP_FREECURRENCYAPI_URL
+        }?date_from=${dateMonthAgo.toLocaleDateString()}&date_to=${dateYesterday.toLocaleDateString()}`,
+        {
+          method: "GET",
+          headers: {
+            apikey: import.meta.env.VITE_APP_FREECURRENCYAPI_KEY!,
+          },
+        }
+      )
         .then((response) => response.json())
         .then((result) => {
-          setData(result);
+          setData(result.data);
           localStorage.setItem(
             "wj_freecurrencyapi",
-            JSON.stringify({ timestamp: Date.now(), data: result, url })
+            JSON.stringify({ timestamp: Date.now(), data: result.data, url })
           );
         })
         .catch((error) => setError(error))
