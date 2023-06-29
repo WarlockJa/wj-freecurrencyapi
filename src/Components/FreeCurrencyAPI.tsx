@@ -168,7 +168,7 @@ const FreeCurrencyAPI = ({ data }: { data: TFreeCurrencyApiData }) => {
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: "#444",
+              backgroundColor: "var(--clr-button-bg)",
               fontSize: "0.8rem",
               textAlign: "center",
               borderRadius: "4px",
