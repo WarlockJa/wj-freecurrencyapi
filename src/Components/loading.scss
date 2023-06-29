@@ -1,17 +1,23 @@
 .loading {
-  margin: 0 auto;
+  margin: auto;
   width: 100%;
   max-width: var(--sz-max-width);
-  height: 100vh;
 
   .loading__spinnerWrapper {
+    padding: 3em 0;
     max-height: 350px;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid var(--clr-main-font);
+    border: 1px solid var(--clr-font-main);
     border-radius: 14px;
-    background-color: var(--clr-main-bg);
+    background-color: var(--clr-button-bg);
+  }
+
+  @media screen and (width < 700px) {
+    .loading__spinnerWrapper {
+      padding: 7em 0;
+    }
   }
 }

@@ -1,13 +1,11 @@
+import { format, startOfYesterday } from "date-fns";
 import { useEffect, useState } from "react";
 
 const useGetYesterdayDate = (dayToday: number) => {
   const [yesterday, setYesterday] = useState<string>("");
 
   useEffect(() => {
-    const dateYesterday = new Date();
-    dateYesterday.setDate(dateYesterday.getDate() - 1);
-    const dateYesterdayString = dateYesterday.toLocaleDateString();
-    setYesterday(dateYesterdayString);
+    setYesterday(format(startOfYesterday(), "yyyy-MM-dd"));
   }, [dayToday]);
 
   return { yesterday };
