@@ -66,38 +66,30 @@ const FreeCurrencyAPI = ({ data }: { data: TFreeCurrencyApiData }) => {
   // handling currency change including switching already present currencies
   const handleSelect = (value: string, source: string) => {
     if (source === "first") {
+      // changing first currency
       if (value === secondCurrency) {
+        // chosen new currency is the same as second -> switching currency fields
         setSecondCurrency(firstCurrency);
-        setSecondCurrencyInput(
-          (
-            (data[yesterday][firstCurrency] / data[yesterday][value]) *
-            Number(firstCurrencyInput)
-          ).toFixed(4)
-        );
+        setSecondCurrencyInput(firstCurrencyInput);
+        setFirstCurrencyInput(secondCurrencyInput);
       } else {
-        setSecondCurrencyInput(
-          (
-            (data[yesterday][secondCurrency] / data[yesterday][value]) *
-            Number(firstCurrencyInput)
-          ).toFixed(4)
+        // chosen new currency -> calculating exchange for the new currency
+        setFirstCurrencyInput(
+          (data[yesterday][value] / data[yesterday][secondCurrency]).toFixed(4)
         );
       }
       setFirstCurrency(value);
     } else {
+      // changing second currency
       if (value === firstCurrency) {
+        // chosen new currency is the same as second -> switching currency fields
         setFirstCurrency(secondCurrency);
-        setFirstCurrencyInput(
-          (
-            (data[yesterday][secondCurrency] / data[yesterday][value]) *
-            Number(secondCurrencyInput)
-          ).toFixed(4)
-        );
+        setFirstCurrencyInput(secondCurrencyInput);
+        setSecondCurrencyInput(firstCurrencyInput);
       } else {
-        setFirstCurrencyInput(
-          (
-            (data[yesterday][firstCurrency] / data[yesterday][value]) *
-            Number(secondCurrencyInput)
-          ).toFixed(4)
+        // chosen new currency -> calculating exchange for the new currency
+        setSecondCurrencyInput(
+          (data[yesterday][value] / data[yesterday][firstCurrency]).toFixed(4)
         );
       }
       setSecondCurrency(value);
